@@ -15,8 +15,12 @@ const app = express();
 // Middleware
 app.use(express.json({ limit: '10mb' })); // Increase limit for JSON payloads
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
-app.use(cors());
-app.use('/uploads', express.static('uploads'));
+app.use(cors());app.use(cors({
+  origin: "https://smartrecruiter.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));app.use('/uploads', express.static('uploads'));
 
 // ✅ Connect to MongoDB (Replace with your MongoDB URL)
 mongoose.connect("mongodb+srv://veerraju:veerraju@cluster0.b8c6k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
